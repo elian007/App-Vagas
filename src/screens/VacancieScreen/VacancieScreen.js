@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Button, View, Text, ScrollView, TouchableOpacity, FlatList} from 'react-native'
 
-import DetailScreen from '../DetailScreen/DetailScreen'
+import vagas from '../../../vagas.json'
+import VagaCard from '../../components/VagaCard/VagaCard'
 
 export function VacancieNavigation() {
   return {
@@ -24,16 +25,30 @@ export default function VacancieScreen ({ navigation }) {
       
   
       return (
-        <ScrollView>
-          <TouchableOpacity onPress={() => navigation.navigate('DetailScreen')}>
-           <Text>Vaga: Analista de RH</Text>
-            <Text>Descrição: Cccccccc</Text>
-            <Text>Requisitos: Dddddddd</Text>
-            <Text>Empresa: Aaaaaaaaa</Text>
-          </TouchableOpacity>
-        
-        
-        </ScrollView>
+        <View>
+          <FlatList 
+            data = {vagas}
+            renderItem = {({item}) =>{
+              console.log(item)
+              return(
+                <TouchableOpacity onPress={() => navigation.navigate('DetailScreen',
+                  {
+                    vaga: item.vaga, 
+                    descricao: item.descricao, 
+                    requisitos: item.requisitos,
+                    empresa: item.empresa
+                  })}
+                >
+
+                  <VagaCard vagas={item}/>
+                </TouchableOpacity>
+              )
+            }}
+            keyExtractor={item => item.id.toString()}
+            numColumns={2}
+          />
+
+        </View>
       )
     }
   

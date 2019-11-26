@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, KeyboardAvoidingView, Text, TouchableOpacity, Image} from 'react-native';
+import { View, KeyboardAvoidingView, Text, TouchableOpacity, Image, Alert} from 'react-native';
 import Ripple from 'react-native-material-ripple';
 import firebase from 'firebase'
 
@@ -37,19 +37,19 @@ export default function LoginCompanyScreen({ navigation }) {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(user =>{
-      navigation.navigate('VacancieScreen');
+      navigation.navigate('VacancieScreen', {user: user});
 
     })
     .catch(function(error) {
       var errorCode = error.code;
       if (errorCode === 'auth/wrong-password') {
-        alert(
+        Alert.alert(
           'Senha incorreta.',
         );
         
       } 
       if (errorCode === 'auth/user-not-found') {
-        alert(
+        Alert.alert(
           'E-mail inexistente.',
           'Deseja criar um novo usuário?',
           [{
@@ -58,13 +58,33 @@ export default function LoginCompanyScreen({ navigation }) {
           },
           {
             text: 'Sim',
-            onPress: () => {}
+            onPress: () => {
+              firebase
+              .auth()
+              .createUserWithEmailAndPassword(email, password)
+              .then(user =>{
+                Alert.alert(
+                  'Usuário cadastrado com sucesso!',
+                )
+                navigation.navigate('LoginInternScreen')
+              })
+              .catch(function(error) {
+                var errorCode = error.code;
+                if (errorCode === 'auth/wrong-password') {
+                  Alert.alert('Senha incorreta.');
+                } 
+                if (errorCode === 'auth/user-not-found') {
+                  Alert.alert(
+                    'E-mail inexistente.',)
+                  }   
+                })     
+            }
           }
-        ]
+        ],
           );
       }
       else {
-        alert('Erro desconhecido');
+        Alert.alert('Erro desconhecido');
       }
     });
   }

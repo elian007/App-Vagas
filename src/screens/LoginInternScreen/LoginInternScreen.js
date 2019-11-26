@@ -38,12 +38,12 @@ export default function LoginInternScreen({ navigation }) {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(user =>{
-      navigation.navigate('VacancieScreen');
+      navigation.navigate('VacancieScreen', {user: user});
     })
     .catch(function(error) {
       var errorCode = error.code;
       if (errorCode === 'auth/wrong-password') {
-        alert('Senha incorreta.');
+        Alert.alert('Senha incorreta.');
       } 
       if (errorCode === 'auth/user-not-found') {
         Alert.alert(
@@ -51,33 +51,43 @@ export default function LoginInternScreen({ navigation }) {
           'Deseja criar um novo usuário?',
           [{
             text: 'Não',
-            onPress: () => {}
+            onPress: () => {
+            }
           },
           {
             text: 'Sim',
-            onPress: () => {}
+            onPress: () => {
+              firebase
+              .auth()
+              .createUserWithEmailAndPassword(email, password)
+              .then(user =>{
+                Alert.alert(
+                  'Usuário cadastrado com sucesso!',
+                )
+                navigation.navigate('LoginInternScreen')
+              })
+              .catch(function(error) {
+                var errorCode = error.code;
+                if (errorCode === 'auth/wrong-password') {
+                  Alert.alert('Senha incorreta.');
+                } 
+                if (errorCode === 'auth/user-not-found') {
+                  Alert.alert(
+                    'E-mail inexistente.',)
+                  }   
+                })     
+            }
           }
-        ]
+        ],
           );
       }
       else {
-        alert('Erro desconhecido');
+        Alert.alert('Erro desconhecido');
       }
     });
        
   }
 
-function renderMsg(){
-  {message}
-  if(!message)
-  return null
-  return(
-    <View>
-      <Text>{message}</Text>
-    </View>
-  )
-
-}
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 15 }}>
@@ -115,7 +125,6 @@ function renderMsg(){
         >
           <Text style={styles.textButton}>Entrar!</Text>
         </Ripple>
-          {renderMsg()}
         <Ripple
           rippleContainerBorderRadius={50}
           style={styles.button}

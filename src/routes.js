@@ -28,13 +28,13 @@ const tabs = createBottomTabNavigator({
 
 
 const startStack = createStackNavigator({
-   
+   /*
     LoginInternScreen: {
     screen: LoginInternScreen,
   },
   LoginCompanyScreen: {
     screen: LoginCompanyScreen,
-  },
+  },*/
   VacancieScreen: {
     screen: VacancieScreen,
     navigationOptions: VacancieNavigation
@@ -50,7 +50,7 @@ const startStack = createStackNavigator({
 });
 
 const AppNavigator = createSwitchNavigator({
-  tabs,
+  //tabs,
   startStack,
   
 });

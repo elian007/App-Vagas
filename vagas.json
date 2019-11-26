@@ -1,0 +1,32 @@
+[
+    {
+        "id":1,
+        "vaga":"Analista de RH",
+        "descricao": "Atuar no gerenciamento de pessoal",
+        "requisitos": "Formação em RH",
+        "empresa": "RH Soluções"
+    },
+    {
+        "id":2,
+        "vaga":"Analista Financeiro",
+        "descricao": "Atuar no financeiro",
+        "requisitos": "Formação em Administração",
+        "empresa": "RH Soluções",
+        "img":"./assets/image/logoE.jpg"
+    },
+    {
+        "id":3,
+        "vaga":"Analista de TI",
+        "descricao": "Atuar no gerenciamento de TI",
+        "requisitos": "Formação em TI",
+        "empresa": "RH Soluções"
+    },
+    {
+        "id":4,
+        "vaga":"Contador",
+        "descricao": "Atuar na contabilidade",
+        "requisitos": "Formação em Ciências Contábeis",
+        "empresa": "RH Soluções"
+    }
+
+]
