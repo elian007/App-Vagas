@@ -4,6 +4,8 @@ import { Button, View, Text, ScrollView, TouchableOpacity, FlatList} from 'react
 import vagas from '../../../vagas.json'
 import VagaCard from '../../components/VagaCard/VagaCard'
 
+import './style'
+
 export function VacancieNavigation() {
   return {
     title: 'Vagas',
@@ -29,7 +31,6 @@ export default function VacancieScreen ({ navigation }) {
           <FlatList 
             data = {vagas}
             renderItem = {({item}) =>{
-              console.log(item)
               return(
                 <TouchableOpacity onPress={() => navigation.navigate('DetailScreen',
                   {

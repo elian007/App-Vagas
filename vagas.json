@@ -1,10 +1,11 @@
-[
+[ 
     {
         "id":1,
         "vaga":"Analista de RH",
         "descricao": "Atuar no gerenciamento de pessoal",
         "requisitos": "Formação em RH",
-        "empresa": "RH Soluções"
+        "empresa": "RH Soluções",
+        "img":"https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiBptbn1ZTmAhWVHrkGHRDTDu4QjRx6BAgBEAQ&url=https%3A%2F%2Fpt.pngtree.com%2Ffree-logo-png&psig=AOvVaw1TzlT6dJwkhhhg_IO3KRRN&ust=1575297279089624"
     },
     {
         "id":2,
@@ -12,21 +13,23 @@
         "descricao": "Atuar no financeiro",
         "requisitos": "Formação em Administração",
         "empresa": "RH Soluções",
-        "img":"./assets/image/logoE.jpg"
+        "img":"https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiBptbn1ZTmAhWVHrkGHRDTDu4QjRx6BAgBEAQ&url=https%3A%2F%2Fpt.pngtree.com%2Ffree-logo-png&psig=AOvVaw1TzlT6dJwkhhhg_IO3KRRN&ust=1575297279089624"
     },
     {
         "id":3,
         "vaga":"Analista de TI",
         "descricao": "Atuar no gerenciamento de TI",
         "requisitos": "Formação em TI",
-        "empresa": "RH Soluções"
+        "empresa": "RH Soluções",
+        "img":"./assets/image/logoE.jpg"
     },
     {
         "id":4,
         "vaga":"Contador",
         "descricao": "Atuar na contabilidade",
         "requisitos": "Formação em Ciências Contábeis",
-        "empresa": "RH Soluções"
+        "empresa": "RH Soluções",
+        "img":"./assets/image/logoE.jpg"
     }
 
 ]

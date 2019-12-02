@@ -3,38 +3,103 @@ import {
     createSwitchNavigator
   } from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
+import React from 'react'
+import Icon from 'react-native-vector-icons';
 
 import DetailScreen , {DetailNavigation} from './screens/DetailScreen/DetailScreen'
 
 import VacancieScreen, { VacancieNavigation } from './screens/VacancieScreen/VacancieScreen'
 import RegisterScreen, { RegisterNavigation } from './screens/RegisterScreen/RegisterScreen'
 import HomeScreen from './screens/HomeScreen/HomeScreen'
-import LoginInternScreen, { LoginInternNavigation } from './screens/LoginInternScreen/LoginInternScreen'
 import LoginCompanyScreen, { LoginCompanyNavigation } from './screens/LoginCompanyScreen/LoginCompanyScreen'
+import UserScreen, { UserNavigation } from './screens/UserScreen/UserScreen'
+import AboutScreen, { AboutNavigation } from './screens/AboutScreen/AboutScreen'
+import RegisterVacancie, { RegisterVacancieNavigation } from './screens/RegisterVacancie/RegisterVacancie'
+
+
+
 import { createBottomTabNavigator, createTabNavigator } from 'react-navigation-tabs'
 
-const tabs = createBottomTabNavigator({
-  LoginInternScreen: {
-    screen: LoginInternScreen,
-    navigationOptions: LoginInternNavigation
+
+const BaseNavigator = createBottomTabNavigator({
+  HomeScreen: {
+    screen: HomeScreen,
+    navigationOptions: 
+      <Icon name="home" size={18} color="#999" />
+    
+    
   },
-  LoginCompanyScreen: {
-    screen: LoginCompanyScreen,
-    navigationOptions: LoginCompanyNavigation
+  UserScreen: {
+      screen: UserScreen,
+      navigationOptions: () =>({
+        
+      })
+  },
+  VacancieScreen: {
+    screen: VacancieScreen,
+    navigationOptions: () =>({
+      
+    })
+  },
+  AboutScreen: {
+    screen: AboutScreen,
+    navigationOptions: () =>({
+     
+      
+    })
+  }
+
+})
+
+const userNavigator = createBottomTabNavigator({
+    HomeScreen: {
+    screen: HomeScreen,
+    navigationOptions: () =>({
+      
+    })
+    
+  },
+  VacancieScreen: {
+    screen: VacancieScreen,
+    navigationOptions: () =>({
+      
+    })
+    
+  },
+  AboutScreen: {
+    screen: AboutScreen,
+    navigationOptions: () =>({
+    
+    })
   }
 
 })
 
 
 
+
+
 const startStack = createStackNavigator({
-   /*
-    LoginInternScreen: {
-    screen: LoginInternScreen,
-  },
+   HomeScreen: {
+    screen: HomeScreen,
+    navigationOptions: {header: null}
+   },
+   RegisterVacancie: {
+    screen: RegisterVacancie,
+    navigationOptions: RegisterVacancieNavigation
+   },
+   UserScreen: {
+    screen: UserScreen,
+    navigationOptions: UserNavigation
+   },
+   AboutScreen: {
+    screen: AboutScreen,
+    navigationOptions: AboutNavigation
+   },
   LoginCompanyScreen: {
     screen: LoginCompanyScreen,
-  },*/
+    navigationOptions: LoginCompanyNavigation
+  },
   VacancieScreen: {
     screen: VacancieScreen,
     navigationOptions: VacancieNavigation
@@ -45,13 +110,31 @@ const startStack = createStackNavigator({
   },
   DetailScreen: {
     screen: DetailScreen,
-    navigationOptions: DetailNavigation
+    navigationOptions: ({navigation}) => {
+       
+      return {
+        title: navigation.state.params.vaga,
+        headerStyle: {
+          backgroundColor: theme.primaryColor,
+          elevation: 1,
+          borderBottonColor: theme.borderBotton
+        },
+        headerTintColor: theme.light,
+        headerTitleStyle: { 
+          color: theme.light,
+          fontSize: 28
+        }
+      }
+    }
   },
+ 
 });
 
 const AppNavigator = createSwitchNavigator({
-  //tabs,
+  RegisterVacancie,
+  HomeScreen,
   startStack,
+ 
   
 });
 

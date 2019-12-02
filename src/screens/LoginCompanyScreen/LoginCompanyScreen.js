@@ -7,22 +7,18 @@ import Input from '../../components/Input/Input';
 import theme from '../../styles/theme';
 import './style'
 
-
 export function LoginCompanyNavigation() {
   return {
     title: 'Empresa',
-    tabBarOptions: {
-      inactiveTintColor: 'blue',
-      activeTintColor: 'white',
-
-      activeBackgroundColor: '#0000FF',
-
-      labelStyle: {
-        fontSize: 18,
-      },
-      style: {
-        backgroundColor: 'white',
-      },
+    headerStyle: {
+      backgroundColor: theme.primaryColor,
+      elevation: 1,
+      borderBottonColor: theme.borderBotton
+    },
+    headerTintColor: theme.light,
+    headerTitleStyle: { 
+      color: theme.light,
+      fontSize: 28
     }
   };
   };
@@ -37,7 +33,7 @@ export default function LoginCompanyScreen({ navigation }) {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(user =>{
-      navigation.navigate('VacancieScreen', {user: user});
+      navigation.navigate('RegisterVacancie', {user: user});
 
     })
     .catch(function(error) {
@@ -63,18 +59,18 @@ export default function LoginCompanyScreen({ navigation }) {
               .auth()
               .createUserWithEmailAndPassword(email, password)
               .then(user =>{
-                Alert.alert(
+                alert(
                   'Usuário cadastrado com sucesso!',
                 )
-                navigation.navigate('LoginInternScreen')
+                navigation.navigate('LoginCompanyScreen')
               })
               .catch(function(error) {
                 var errorCode = error.code;
                 if (errorCode === 'auth/wrong-password') {
-                  Alert.alert('Senha incorreta.');
+                  alert('Senha incorreta.');
                 } 
                 if (errorCode === 'auth/user-not-found') {
-                  Alert.alert(
+                  alert(
                     'E-mail inexistente.',)
                   }   
                 })     
@@ -84,7 +80,7 @@ export default function LoginCompanyScreen({ navigation }) {
           );
       }
       else {
-        Alert.alert('Erro desconhecido');
+        alert(error);
       }
     });
   }
@@ -129,7 +125,7 @@ export default function LoginCompanyScreen({ navigation }) {
         <Ripple
           rippleContainerBorderRadius={50}
           style={styles.button}
-          onPress={() => navigation.navigate('RegisterScreen')
+          onPress={() => navigation.navigate('RegisterVacancie')
           }  
         >
           <Text style={styles.textButton}>Criar minha conta!</Text>
@@ -137,5 +133,6 @@ export default function LoginCompanyScreen({ navigation }) {
 
       </KeyboardAvoidingView>
     </View> 
+   
   );
 }

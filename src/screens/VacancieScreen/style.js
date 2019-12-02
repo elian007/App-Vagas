@@ -4,17 +4,16 @@ import { StyleSheet } from 'react-native';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10, 
-    height: 100
+    padding: 5, 
+    height: 120
   },
   card: {
    flex: 1,
-   borderWidth: 2
+   borderWidth: 2,
+   height:80
   },
   text: {
    
-    fontSize: 19,
-    fontWeight: 'bold'
   },
   textButton: {
     

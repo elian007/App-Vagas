@@ -1,5 +1,5 @@
 import React from 'react';
-import { View , Text, StyleSheet } from 'react-native';
+import { View , Text, StyleSheet, Image } from 'react-native';
 
 // import { Container } from './styles';
 
@@ -22,9 +22,9 @@ const CardDetail = ({vagas}) => (
           <Text>Empresa: { ` ${vagas.empresa}`}</Text>
           <Text>Descrição: {`${vagas.descricao}`}</Text>
           <Text>Requisitos: {`${vagas.requisitos}`}</Text>
+          <Image source= {{uri: vagas.img}} aspectRatio={1}/>
 
       </View>
-
   </View>
 
 )
