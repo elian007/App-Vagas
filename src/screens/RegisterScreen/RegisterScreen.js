@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, KeyboardAvoidingView, Text } from 'react-native';
+import { View, KeyboardAvoidingView, Text, Alert } from 'react-native';
 import Ripple from 'react-native-material-ripple';
 
 import Input from '../../components/Input/Input';
 import theme from '../../styles/theme';
+import firebase from 'firebase'
 
 export function RegisterNavigation() {
   return {
@@ -22,27 +23,39 @@ export function RegisterNavigation() {
 }
 
 export default function RegisterScreen({ navigation }) {
-  const [name, setname] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+
+  function handleSubmit(email, password) {
+              firebase
+              .auth()
+              .createUserWithEmailAndPassword(email, password)
+              .then(user =>{
+                Alert.alert(
+                  'Usuário cadastrado com sucesso!',
+                )
+                navigation.navigate('LoginCompanyScreen')
+              })
+              .catch(function(error) {
+                var errorCode = error.code;
+                  alert(errorCode);
+                } 
+                   
+      
+          );
+  }
 
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <KeyboardAvoidingView style={{ flex: 1, width: '100%' }} behavior="padding" enabled>
-        <Input
-          value={name}
-          changeText={setname}
-          label="Nome"
-          isPrimary
-          focusedColor={theme.primaryColor}
-          unfocusedColor={theme.darktGray}
-        />
+        
         <Input
           autoCapitalize="none"
           value={email}
           changeText={setEmail}
-          label="Email"
+          label="E-mail: empresa@provider.com"
           isPrimary
           focusedColor={theme.primaryColor}
           unfocusedColor={theme.darktGray}
@@ -52,7 +65,7 @@ export default function RegisterScreen({ navigation }) {
           secureTextEntry
           value={password}
           changeText={setPassword}
-          label="Senha"
+          label="Enter your password here"
           isPrimary
           focusedColor={theme.primaryColor}
           unfocusedColor={theme.darktGray}
@@ -60,7 +73,7 @@ export default function RegisterScreen({ navigation }) {
         <Ripple
                      rippleContainerBorderRadius={50}
                      style={styles.button}
-                     onPress={() => navigation.navigate()}
+                     onPress={() => handleSubmit(email, password)}
                 >
                     <Text style={styles.textButton}>Salvar!</Text>
                </Ripple>

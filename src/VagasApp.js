@@ -10,12 +10,12 @@ import rootReducer from './reducers'
 
 const store = createStore(rootReducer, devToolsEnhancers())
 
-export default function AppVagas() {
-  return (
+const AppVagas = prop => (
     <Provider store={store}>
         <Routes />
 
     </Provider>
    
   );
-}
+
+  export default AppVagas

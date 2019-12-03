@@ -12,9 +12,11 @@ import VacancieScreen, { VacancieNavigation } from './screens/VacancieScreen/Vac
 import RegisterScreen, { RegisterNavigation } from './screens/RegisterScreen/RegisterScreen'
 import HomeScreen from './screens/HomeScreen/HomeScreen'
 import LoginCompanyScreen, { LoginCompanyNavigation } from './screens/LoginCompanyScreen/LoginCompanyScreen'
-import UserScreen, { UserNavigation } from './screens/UserScreen/UserScreen'
+import UserScreen, { UserScreenNavigation } from './screens/UserScreen/UserScreen'
 import AboutScreen, { AboutNavigation } from './screens/AboutScreen/AboutScreen'
 import RegisterVacancie, { RegisterVacancieNavigation } from './screens/RegisterVacancie/RegisterVacancie'
+import ListVacancie, { ListVacancieNavigation } from './screens/ListVacancie/ListVacancie'
+import HomeCompany, { HomeCompanyNavigation } from './screens/HomeCompany/HomeCompany'
 
 
 
@@ -84,13 +86,18 @@ const startStack = createStackNavigator({
     screen: HomeScreen,
     navigationOptions: {header: null}
    },
+   
    RegisterVacancie: {
     screen: RegisterVacancie,
     navigationOptions: RegisterVacancieNavigation
    },
+   ListVacancie: {
+    screen: ListVacancie,
+    navigationOptions: ListVacancieNavigation
+   },
    UserScreen: {
     screen: UserScreen,
-    navigationOptions: UserNavigation
+    navigationOptions: UserScreenNavigation
    },
    AboutScreen: {
     screen: AboutScreen,
@@ -104,6 +111,10 @@ const startStack = createStackNavigator({
     screen: VacancieScreen,
     navigationOptions: VacancieNavigation
   },
+  HomeCompany: {
+    screen: HomeCompany,
+    navigationOptions: {header: null}
+   },
   RegisterScreen: {
     screen: RegisterScreen,
     navigationOptions: RegisterNavigation
@@ -131,7 +142,6 @@ const startStack = createStackNavigator({
 });
 
 const AppNavigator = createSwitchNavigator({
-  RegisterVacancie,
   HomeScreen,
   startStack,
  

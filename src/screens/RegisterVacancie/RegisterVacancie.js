@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
-import {View, Text, KeyboardAvoidingView, TextInput} from 'react-native'
+import {View, Text, KeyboardAvoidingView, TextInput, StyleSheet, Alert} from 'react-native'
 import Ripple from 'react-native-material-ripple';
+import firebase from 'firebase'
+
 
 import Input from '../../components/Input/Input';
 import theme from '../../styles/theme';
@@ -17,18 +19,40 @@ export function RegisterVacancieNavigation() {
       headerTitleStyle: { 
         color: theme.light,
         fontSize: 28
-      }
+      },
+      
     };
   }
 
 
 export default function RegisterVacancie({ navigation }) {
   const [vaga, setvaga] = useState();
-  const [descricao, setdescricao] = useState();
-  const [requisitos, setrequisitos] = useState();
+  //const [descricao, setdescricao] = useState();
+  //const [requisitos, setrequisitos] = useState();
   const [empresa, setempresa] = useState();
+  const [descricao, onChangeDesc] = React.useState('');
+  const [requisitos, onChangeReq] = React.useState('');
 
 
+  function saveVacancie (v, emp, desc, req) {
+    const { currentUser} = firebase.auth()
+
+    firebase
+     .database()
+     .ref(`/users/${currentUser.uid}/vagas`)
+     .push({
+        vaga: `${v}`,
+        empresa: `${emp}`,
+        descricao: `${desc}`,
+        requisitos: `${req}`
+     })
+     .then(() => {
+      Alert.alert(
+        'Vaga cadastrada!',
+      )
+       navigation.navigate('HomeCompany')
+     })
+  }
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 15 }}>
@@ -42,47 +66,69 @@ export default function RegisterVacancie({ navigation }) {
           unfocusedColor={theme.darktGray}
         />
         <Input
-          autoCapitalize="none"
-          secureTextEntry
           value={empresa}
           changeText={setempresa}
-          label="Empresa
-          "
+          label="Empresa"
           isPrimary
           focusedColor={theme.primaryColor}
           unfocusedColor={theme.darktGray}
         />
         <TextInput
-          autoCapitalize="none"
           value={descricao}
-          changeText={setdescricao}
+          onChangeText={text => onChangeDesc(text)}
           placeholder="Descrição"
           isPrimary
           focusedColor={theme.primaryColor}
           unfocusedColor={theme.darktGray}
           numberOfLines={5}
           multiline={true}
+          style = {styles.input}
         />
         <TextInput
-          autoCapitalize="none"
-          secureTextEntry
+          
           value={requisitos}
-          changeText={setrequisitos}
+          onChangeText={text => onChangeReq(text)}
           placeholder="Requisitos"
           isPrimary
           focusedColor={theme.primaryColor}
           unfocusedColor={theme.darktGray}
           numberOfLines={5}
           multiline={true}
+          style = {styles.input}
         />
          
         <Ripple
                      rippleContainerBorderRadius={50}
                      style={styles.button}
-                     onPress={() => navigation.navigate()}
+                     onPress={() => saveVacancie(vaga, empresa, descricao, requisitos)}
                 >
                     <Text style={styles.textButton}>Salvar!</Text>
                </Ripple>
       </KeyboardAvoidingView>
     </View>
 );}
+
+
+const styles = StyleSheet.create({
+  input:{
+    borderWidth: 1,
+    padding: 15,
+    marginTop: 8
+  },
+  button: {
+    width: '40%',
+    marginVertical: 25,
+    backgroundColor: '#38B6FF',
+    paddingVertical: 15,
+    borderRadius: 50,
+    borderBottomColor: '#38B6FF'
+  },
+  textButton: {
+    textAlign: 'center',
+    color: 'white'
+  },
+  registerText: {
+    color: '#fff',
+    fontWeight: '600'
+  }
+})

@@ -12,32 +12,31 @@ export default styles = StyleSheet.create({
   },
   description: {
     color: theme.primaryDarkColor,
-    marginVertical: 25,
-    fontSize: 15
-  },
-  img: {
-    marginTop: 80,
-    width: 450,
-    height: 300,
-    marginLeft: 60
-
+    marginVertical: 25
   },
   button: {
-    width: '70%',
+    width: '100%',
+    alignItems: 'center',
     marginVertical: 25,
-    backgroundColor: '#fff',
+    backgroundColor: '#38B6FF',
     paddingVertical: 15,
     borderRadius: 50,
-    padding: 20
+    borderBottomColor: '#38B6FF'
   },
   textButton: {
     textAlign: 'center',
-    color: '#38B6FF'
+    color: 'white'
   },
   registerText: {
-    color: 'white',
-    fontWeight: '600',
-    padding: 20
+    color: '#fff',
+    fontWeight: '600'
+  },
+  img: {
+    marginTop: 80,
+    width: 250,
+    height: 150,
+    marginLeft: 60
+
   },
   touc: {
     flex: 1,
@@ -47,8 +46,7 @@ export default styles = StyleSheet.create({
   },
   but: {
     padding: 25,
-    color: 'white',
+    color: '#38B6FF',
     fontSize: 22
   },
- 
 });

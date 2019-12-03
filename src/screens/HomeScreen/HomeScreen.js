@@ -8,7 +8,7 @@ import styles from './styles';
 export default function HomeScreen ({ navigation }) {
           return (
             <View style={styles.container}>
-            <Image style={styles.image} source={require('../../../assets/image/logo.png')} />
+            <Image style={styles.img} source={require('../../../assets/image/logo.png')} />
 
                 <Ripple
                      rippleContainerBorderRadius={50}
@@ -25,7 +25,13 @@ export default function HomeScreen ({ navigation }) {
                 >
                     <Text style={styles.textButton}>Acesso: Empresas!</Text>
                </Ripple>
-               
+               <View style = {styles.touc}>
+                    <TouchableOpacity onPress={() => navigation.navigate('AboutScreen')}>
+                         <Text style = {styles.but}>
+                              Sobre o App
+                         </Text>
+                    </TouchableOpacity>
+               </View>
             </View>
           );
     }

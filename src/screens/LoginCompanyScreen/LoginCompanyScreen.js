@@ -7,9 +7,10 @@ import Input from '../../components/Input/Input';
 import theme from '../../styles/theme';
 import './style'
 
+
 export function LoginCompanyNavigation() {
   return {
-    title: 'Empresa',
+    title: 'Login',
     headerStyle: {
       backgroundColor: theme.primaryColor,
       elevation: 1,
@@ -23,17 +24,20 @@ export function LoginCompanyNavigation() {
   };
   };
 
+  
 
+  
 export default function LoginCompanyScreen({ navigation }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
 
   function handleSubmit(email, password) {
     firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(user =>{
-      navigation.navigate('RegisterVacancie', {user: user});
+      navigation.navigate('HomeCompany', {user: user});
 
     })
     .catch(function(error) {
@@ -98,7 +102,7 @@ export default function LoginCompanyScreen({ navigation }) {
           autoCapitalize="none"
           value={email}
           changeText={setEmail}
-          label="E-mail: empresa@provider.com"
+          label="E-mail: empresa@email.com"
           isPrimary
           focusedColor={theme.primaryColor}
           unfocusedColor={theme.darktGray}
@@ -109,7 +113,7 @@ export default function LoginCompanyScreen({ navigation }) {
           secureTextEntry
           value={password}
           changeText={setPassword}
-          label="Enter your password here"
+          label="Digite a senha"
           isPrimary
           focusedColor={theme.primaryColor}
           unfocusedColor={theme.darktGray}
@@ -125,13 +129,14 @@ export default function LoginCompanyScreen({ navigation }) {
         <Ripple
           rippleContainerBorderRadius={50}
           style={styles.button}
-          onPress={() => navigation.navigate('RegisterVacancie')
+          onPress={() => navigation.navigate('RegisterScreen')
           }  
         >
           <Text style={styles.textButton}>Criar minha conta!</Text>
         </Ripple>
-
-      </KeyboardAvoidingView>
+        
+        
+      </KeyboardAvoidingView> 
     </View> 
    
   );
