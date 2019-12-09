@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, View, Text, ScrollView, TouchableOpacity, FlatList} from 'react-native'
+import { Button, View, Text, ScrollView, TouchableOpacity, FlatList, ActivityIndicator} from 'react-native'
 
 import vagas from '../../../vagas.json'
 import VagaCard from '../../components/VagaCard/VagaCard'
@@ -23,8 +23,16 @@ export function VacancieNavigation() {
 }
 
 export default function VacancieScreen ({ navigation }) {
-  
-      
+
+
+  renderFooter = () => {
+    if(!vagas) return null
+    return (
+      <View>
+        <ActivityIndicator />
+      </View>
+    );
+  };
   
       return (
         <View>
@@ -37,6 +45,7 @@ export default function VacancieScreen ({ navigation }) {
                     vaga: item.vaga, 
                     descricao: item.descricao, 
                     requisitos: item.requisitos,
+                    email: item.email,
                     empresa: item.empresa
                   })}
                 >
@@ -47,6 +56,8 @@ export default function VacancieScreen ({ navigation }) {
             }}
             keyExtractor={item => item.id.toString()}
             numColumns={2}
+            onEndReachedThreshold={0.1}
+            ListFooterComponent={this.renderFooter}
           />
 
         </View>

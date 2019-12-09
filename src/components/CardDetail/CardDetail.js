@@ -18,11 +18,11 @@ const CardDetail = ({vagas}) => (
   <View style={styles.container}>
 
       <View style={styles.card}>
-          <Text>Vaga: { `${vagas.vaga}`}</Text>
+          <Text style={styles.text}>Vaga: { `${vagas.vaga}`}</Text>
           <Text>Empresa: { ` ${vagas.empresa}`}</Text>
+          <Text>E-mail: { ` ${vagas.email}`}</Text>
           <Text>Descrição: {`${vagas.descricao}`}</Text>
           <Text>Requisitos: {`${vagas.requisitos}`}</Text>
-          <Image source= {{uri: vagas.img}} aspectRatio={1}/>
 
       </View>
   </View>
@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
      flex: 1,
      borderWidth: 1
     },
+    text:{
+      textAlign: 'center'
+    }
 })
 
 

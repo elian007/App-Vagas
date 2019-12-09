@@ -17,67 +17,7 @@ import AboutScreen, { AboutNavigation } from './screens/AboutScreen/AboutScreen'
 import RegisterVacancie, { RegisterVacancieNavigation } from './screens/RegisterVacancie/RegisterVacancie'
 import ListVacancie, { ListVacancieNavigation } from './screens/ListVacancie/ListVacancie'
 import HomeCompany, { HomeCompanyNavigation } from './screens/HomeCompany/HomeCompany'
-
-
-
-import { createBottomTabNavigator, createTabNavigator } from 'react-navigation-tabs'
-
-
-const BaseNavigator = createBottomTabNavigator({
-  HomeScreen: {
-    screen: HomeScreen,
-    navigationOptions: 
-      <Icon name="home" size={18} color="#999" />
-    
-    
-  },
-  UserScreen: {
-      screen: UserScreen,
-      navigationOptions: () =>({
-        
-      })
-  },
-  VacancieScreen: {
-    screen: VacancieScreen,
-    navigationOptions: () =>({
-      
-    })
-  },
-  AboutScreen: {
-    screen: AboutScreen,
-    navigationOptions: () =>({
-     
-      
-    })
-  }
-
-})
-
-const userNavigator = createBottomTabNavigator({
-    HomeScreen: {
-    screen: HomeScreen,
-    navigationOptions: () =>({
-      
-    })
-    
-  },
-  VacancieScreen: {
-    screen: VacancieScreen,
-    navigationOptions: () =>({
-      
-    })
-    
-  },
-  AboutScreen: {
-    screen: AboutScreen,
-    navigationOptions: () =>({
-    
-    })
-  }
-
-})
-
-
+import UpdateVacancie, { UpdateVacancieNavigation } from './screens/UpdateVacancie/UpdateVacancie'
 
 
 
@@ -110,6 +50,10 @@ const startStack = createStackNavigator({
   VacancieScreen: {
     screen: VacancieScreen,
     navigationOptions: VacancieNavigation
+  },
+  UpdateVacancie: {
+    screen: UpdateVacancie,
+    navigationOptions: UpdateVacancieNavigation
   },
   HomeCompany: {
     screen: HomeCompany,

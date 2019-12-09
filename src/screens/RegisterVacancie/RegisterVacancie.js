@@ -30,11 +30,13 @@ export default function RegisterVacancie({ navigation }) {
   //const [descricao, setdescricao] = useState();
   //const [requisitos, setrequisitos] = useState();
   const [empresa, setempresa] = useState();
+  const [email, setemail] = useState();
+
   const [descricao, onChangeDesc] = React.useState('');
   const [requisitos, onChangeReq] = React.useState('');
 
 
-  function saveVacancie (v, emp, desc, req) {
+  function saveVacancie (v, emp, em, desc, req) {
     const { currentUser} = firebase.auth()
 
     firebase
@@ -44,6 +46,7 @@ export default function RegisterVacancie({ navigation }) {
         vaga: `${v}`,
         empresa: `${emp}`,
         descricao: `${desc}`,
+        email: `${em}`,
         requisitos: `${req}`
      })
      .then(() => {
@@ -69,6 +72,14 @@ export default function RegisterVacancie({ navigation }) {
           value={empresa}
           changeText={setempresa}
           label="Empresa"
+          isPrimary
+          focusedColor={theme.primaryColor}
+          unfocusedColor={theme.darktGray}
+        />
+         <Input
+          value={email}
+          changeText={setemail}
+          label="E-mail"
           isPrimary
           focusedColor={theme.primaryColor}
           unfocusedColor={theme.darktGray}
@@ -100,7 +111,7 @@ export default function RegisterVacancie({ navigation }) {
         <Ripple
                      rippleContainerBorderRadius={50}
                      style={styles.button}
-                     onPress={() => saveVacancie(vaga, empresa, descricao, requisitos)}
+                     onPress={() => saveVacancie(vaga, empresa, email, descricao, requisitos)}
                 >
                     <Text style={styles.textButton}>Salvar!</Text>
                </Ripple>

@@ -1,11 +1,15 @@
 import React from 'react';
-import {View, Text, KeyboardAvoidingView, TextInput, StyleSheet, FlatList} from 'react-native'
+import {View, FlatList, TouchableOpacity, Text} from 'react-native'
+import {connect} from 'react-redux';
+
 import firebase from 'firebase'
 
+import { watchVagas } from '../../actions';
 
 // import { Container } from './styles';
 
-
+import vag from '../../../vagas.json'
+import VagaCard from '../../components/VagaCard/VagaCard'
 
 export function ListVacancieNavigation() {
     return {
@@ -23,47 +27,48 @@ export function ListVacancieNavigation() {
       
     };
   }
-export default function ListVacancie({navigation}) {
+
+class ListVacancie extends React.Component {
+
+  componentWillMount() {
+    this.props.watchVagas();
+  }
+
+  render() {
+    return (
+      <View>
+            <FlatList 
+              data = {vag}
+              renderItem = {({item}) => (
+                  <TouchableOpacity onPress={() => navigation.navigate('UpdateVacancie',
+                    {
+                      vaga: item.vaga, 
+                      descricao: item.descricao, 
+                      requisitos: item.requisitos,
+                      empresa: item.empresa
+                    })}
+                  >
   
-
-  
-    //firebase.database().ref('users').on('value').then(function(snapshot) {
-     // const vaga = (snapshot.val() && snapshot.val().vagas) || 'Anonymous';
-     // console.log(vaga)
-   // })
-    const {currentUser} = firebase.auth()
-    var vagas = firebase.database().ref(`users/${currentUser.uid}/vagas/`);
-    vagas.on('value', function(snapshot) {
-      snapshot.val().uid
-    });
-console.log()
-
-
-  return (
-    <View>
-      
-          <FlatList 
-            
-            data = {vagas}
-            renderItem = {({item}) =>{
-              return(
-                <TouchableOpacity onPress={() => navigation.navigate('DetailScreen',
-                  {
-                    vaga: item.vaga, 
-                    descricao: item.descricao, 
-                    requisitos: item.requisitos,
-                    empresa: item.empresa
-                  })}
-                >
-
-                  <VagaCard vagas={item}/>
-                </TouchableOpacity>
-              )
-            }}
-            keyExtractor={item => item.id.toString()}
-            numColumns={2}
-          />
-          
-        </View>
-  );
+                    <VagaCard vagas={item}/>
+                  </TouchableOpacity>
+                )
+              }
+              keyExtractor={item => item.id.toString()}
+              numColumns={2}
+            />
+             
+          </View>
+    );
+  }
 }
+
+const mapStateToProps = (state) => {
+  const { allVagas } = state;
+
+  if (allVagas === null) {
+    return { allVagas: allVagas};
+  }
+  watchVagas
+  return { allVagas: allVagas };
+};
+export default connect(mapStateToProps, { watchVagas })(ListVacancie);
